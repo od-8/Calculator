@@ -1,4 +1,4 @@
-.container {
+/* .actions {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -13,4 +13,11 @@ button {
     border-radius: 25px;
     padding: 8px 12px;
     margin: 4px;
+} */
+
+#result {
+    background-color: aqua;
+    text-align: center;
+    width: 200px;
+    height: 75px;
 }
