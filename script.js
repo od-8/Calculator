@@ -33,67 +33,40 @@ zero.addEventListener("click", () => { display.textContent += 0; });
 
 // Operators
 const add = document.querySelector("#add");
-add.addEventListener("click", () => { display.textContent += "+"; });
+add.addEventListener("click", () => { display.textContent += " + "; });
 
 const subtract = document.querySelector("#subtract");
-subtract.addEventListener("click", () => { display.textContent += "-"; });
+subtract.addEventListener("click", () => { display.textContent = display.textContent == "" ? "-" : " - "; });
 
 const multipy = document.querySelector("#multiply");
-multipy.addEventListener("click", () => { display.textContent += "*"; });
+multipy.addEventListener("click", () => { display.textContent += " * "; });
 
 const divide = document.querySelector("#divide");
-divide.addEventListener("click", () => { display.textContent += "/"; });
+divide.addEventListener("click", () => { display.textContent += " / "; });
 
 const clear = document.querySelector("#clear");
-clear.addEventListener("click", () => {vdisplay.textContent = ""; });
+clear.addEventListener("click", () => { display.textContent = ""; });
 
 const equal = document.querySelector("#equal");
 equal.addEventListener("click", validExpression);
 
 function validExpression() {
-    let exp = display.textContent.split('');
+    let exp = display.textContent.split(' ');
+    let total = calculateTotal(parseInt(exp[0]), exp[1], parseInt(exp[2]));
 
-    if (validSymbols(exp) == false) { 
-        display.textContent = "";
-        return;
-    }
+    console.log(newNum(total))
 
-    display.textContent = solveExpression(exp);
+    display.textContent = validSymbols(exp) == true ? newNum(total) : ""
 }
 
 // Checks if the expression contains only one +, *, / symbol
 // There can be two symbols if one of them is a minus
 function validSymbols(exp) {
-    let symbols = 0;
-
-    for(let i = 0; i < exp.length; i++) {
-        if (["+", "-", "*", "/"].includes(exp[i]) && i != 0) symbols += 1;
-    }
-
-    if (symbols != 1 || ["+", "*", "/"].includes(exp[0])) return false;
+    if (["+", "*", "/"].includes(exp[0])) return false;
+    if ((["+", "-", "*", "/"].includes(exp[1]) == false) || exp[1].length != 1) return false;
+    if (["+", "-", "*", "/"].includes(exp[2])) return false;
 
     return true;
-}
-
-// Solves the expression
-function solveExpression(exp) {
-    for(let i = 0; i < exp.length; i++) {
-        if (i != 0 && ["+", "-", "*", "/"].includes(exp[i])) {
-            return calculateTotal(determineFirstNum(exp), exp[i], parseInt(exp.slice(i + 1).join("")));
-        }
-    }
-}
-
-// Gets the first num
-function determineFirstNum(exp) {
-    let num = "";
-
-    for(let i = 0; i < exp.length; i++) {
-        if (i == 0 || Number.isInteger(parseInt(exp[i]))) num += exp[i];
-        if (i != 0 && Number.isInteger(parseInt(exp[i])) == false) break;
-    }
-
-    return parseInt(num);
 }
 
 // Gets the new total
@@ -108,4 +81,9 @@ function calculateTotal(firstNum, symbol, secondNum) {
         case "/":
             return firstNum /= secondNum;
     }
+}
+
+function newNum(number) {
+    num = number % 1 == 0 ? number : number.toFixed();
+    return num;
 }
