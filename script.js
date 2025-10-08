@@ -36,7 +36,7 @@ const add = document.querySelector("#add");
 add.addEventListener("click", () => { display.textContent += " + "; });
 
 const subtract = document.querySelector("#subtract");
-subtract.addEventListener("click", () => { display.textContent = display.textContent == "" ? "-" : " - "; });
+subtract.addEventListener("click", () => { display.textContent += display.textContent == "" ? "-" : " - ";  });
 
 const multipy = document.querySelector("#multiply");
 multipy.addEventListener("click", () => { display.textContent += " * "; });
