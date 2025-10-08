@@ -56,7 +56,7 @@ function validExpression() {
 
     console.log(newNum(total))
 
-    display.textContent = validSymbols(exp) == true ? newNum(total) : ""
+    display.textContent = validSymbols(exp) == true ? newNum(total) : "";
 }
 
 // Checks if the expression contains only one +, *, / symbol
@@ -84,6 +84,6 @@ function calculateTotal(firstNum, symbol, secondNum) {
 }
 
 function newNum(number) {
-    num = number % 1 == 0 ? number : number.toFixed();
+    num = number % 1 == 0 ? number : number.toFixed(1);
     return num;
 }
